@@ -84,12 +84,6 @@ def get_data_product_page(product_link):
     except:
         time = None
 
-    # item location 
-    try:
-
-        item_location = page.find('div', class_ = 'u-flL').text
-    except: 
-        item_location = None
 
     # seller name 
     try:
@@ -103,7 +97,7 @@ def get_data_product_page(product_link):
     except:
         item_color = None
 
-    return time, item_location, seller_name, item_color
+    return time, seller_name, item_color
   
 # Design a function to get all the data 
 def get_data(link, df):
@@ -166,11 +160,11 @@ def get_data(link, df):
         # item link 
         item_link  = item.find('a', class_ = 's-item__link').attrs['href']
 
-        time_new, item_location_new, seller_name, item_color = get_data_product_page(item_link)
+        time_new,  seller_name, item_color = get_data_product_page(item_link)
 
-        # check if extended locatio is available 
-        if item_location_new != None :
-            item_location = item_location_new
+        
+        
+        print(item_location)
 
         # check if extended time if availbable 
         if time_new != None:
@@ -213,7 +207,7 @@ def main(url):
         df =p
         print(len(df))
         print('Data is updated in the db')
-    df.to_csv('Ipone_xr_sales')
+    df.to_csv('Ipone_xr_sales_2')
 
     
 
